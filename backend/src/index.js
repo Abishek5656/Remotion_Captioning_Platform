@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv"
 import uploadRoutes from "./routes/upload.routes.js";
+
+dotenv.config()
 
 const app = express();
 
