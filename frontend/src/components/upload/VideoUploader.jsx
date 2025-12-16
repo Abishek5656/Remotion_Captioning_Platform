@@ -1,13 +1,22 @@
-import { Card, CardContent, Typography, Stack, Button } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  Button,
+} from "@mui/material";
 import { useState } from "react";
 import UploadDropZone from "./UploadDropZone";
 import UploadProgress from "./UploadProgress";
 import { validateVideoFile } from "../../utils/validation";
+import { uploadVideoApi } from "../../api/uploadApi";
 
 export default function VideoUploader() {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [videoId, setVideoId] = useState(null);
 
   const handleFileSelect = (selectedFile) => {
     const validationError = validateVideoFile(selectedFile);
@@ -17,6 +26,22 @@ export default function VideoUploader() {
     }
     setError("");
     setFile(selectedFile);
+  };
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    try {
+      setUploading(true);
+      setProgress(0);
+
+      const response = await uploadVideoApi(file, setProgress);
+      setVideoId(response.data.videoId);
+    } catch (err) {
+      setError(err.response?.data?.message || "Upload failed");
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -52,11 +77,20 @@ export default function VideoUploader() {
             variant="contained"
             fullWidth
             disabled={!file || uploading}
+            onClick={handleUpload}
           >
             Upload Video
           </Button>
 
-          {uploading && <UploadProgress />}
+          {uploading && (
+            <UploadProgress progress={progress} />
+          )}
+
+          {videoId && (
+            <Typography color="success.main" textAlign="center">
+              Uploaded successfully (ID: {videoId})
+            </Typography>
+          )}
         </Stack>
       </CardContent>
     </Card>

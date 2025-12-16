@@ -1,12 +1,12 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
 
-export default function UploadProgress() {
+export default function UploadProgress({ progress }) {
   return (
     <Box>
       <Typography variant="body2" mb={1}>
-        Uploading...
+        Uploading... {progress}%
       </Typography>
-      <LinearProgress />
+      <LinearProgress variant="determinate" value={progress} />
     </Box>
   );
 }
