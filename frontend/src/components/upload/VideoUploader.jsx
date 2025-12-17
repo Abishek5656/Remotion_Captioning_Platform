@@ -11,12 +11,12 @@ import UploadProgress from "./UploadProgress";
 import { validateVideoFile } from "../../utils/validation";
 import { uploadVideoApi } from "../../api/uploadApi";
 
-export default function VideoUploader() {
+
+export default function VideoUploader({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [videoId, setVideoId] = useState(null);
 
   const handleFileSelect = (selectedFile) => {
     const validationError = validateVideoFile(selectedFile);
@@ -34,9 +34,16 @@ export default function VideoUploader() {
     try {
       setUploading(true);
       setProgress(0);
+      const response = await uploadVideoApi(file, setProgress)
 
-      const response = await uploadVideoApi(file, setProgress);
-      setVideoId(response.data.videoId);
+  
+      const uploadedVideoId = response.data.videoId;
+
+      localStorage.setItem("videoId",uploadedVideoId)
+  
+      if (onUploadSuccess) {
+        onUploadSuccess(uploadedVideoId);
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Upload failed");
     } finally {
@@ -82,15 +89,7 @@ export default function VideoUploader() {
             Upload Video
           </Button>
 
-          {uploading && (
-            <UploadProgress progress={progress} />
-          )}
-
-          {videoId && (
-            <Typography color="success.main" textAlign="center">
-              Uploaded successfully (ID: {videoId})
-            </Typography>
-          )}
+          {uploading && <UploadProgress progress={progress} />}
         </Stack>
       </CardContent>
     </Card>
