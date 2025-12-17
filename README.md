@@ -8,9 +8,10 @@ The application is deployed live and supports **Hinglish captions**, async proce
 
 ## 🚀 Live Demo
 
-- **Frontend:** https://your-frontend-url.vercel.app  
-- **Backend API:** https://your-backend-url.onrender.com  
-- **GitHub Repository:** https://github.com/your-username/remotion-captioning
+- **Frontend:**   
+- **Backend API:** 
+- **GitHub Repository:** https://github.com/Abishek5656/Remotion_Captioning_Platform.git
+- **Project demo:** https://drive.google.com/file/d/154AvSPBcRkbr2ZiiZlrTl51mheW3DeKY/view
 
 ---
 
