@@ -11,9 +11,9 @@ const pythonScript = path.resolve(__dirname, "../../whisper_runner.py");
 
 console.log("pythonScript---->",pythonScript)
 
-const PYTHON_PATH = ""
+let  PYTHON_PATH = ""
 
-  const PYTHON_CMD = process.env.PYTHON_CMD || "python3";
+  const PYTHON_CMD = PYTHON_PATH === "" ? "python3" : PYTHON_PATH;
 
 export function runWhisper(audioPath, outputDir) {
   return new Promise((resolve, reject) => {
@@ -27,7 +27,7 @@ export function runWhisper(audioPath, outputDir) {
   "../../whisper_runner.py"
 );
 
-    const child = spawn(PYTHON_PATH, [
+    const child = spawn(PYTHON_CMD, [
       pythonScript,
       audioPath,
       outputFile,
