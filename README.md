@@ -10,7 +10,7 @@ The application is deployed live and supports **Hinglish captions**, async proce
 
 - **Frontend:**   
 - **Backend API:** 
-- **GitHub Repository:** https://github.com/your-username/remotion-captioning
+- **GitHub Repository:** https://github.com/Abishek5656/Remotion_Captioning_Platform.git
 - **Project demo:** https://drive.google.com/file/d/154AvSPBcRkbr2ZiiZlrTl51mheW3DeKY/view
 
 ---
