@@ -11,8 +11,7 @@ const pythonScript = path.resolve(__dirname, "../../whisper_runner.py");
 
 console.log("pythonScript---->",pythonScript)
 
-const PYTHON_PATH =
-  "C:/Users/shilp/AppData/Local/Programs/Python/Python310/python.exe";
+const PYTHON_PATH = ""
 
   const PYTHON_CMD = process.env.PYTHON_CMD || "python3";
 
@@ -28,7 +27,7 @@ export function runWhisper(audioPath, outputDir) {
   "../../whisper_runner.py"
 );
 
-    const child = spawn(PYTHON_CMD, [
+    const child = spawn(PYTHON_PATH, [
       pythonScript,
       audioPath,
       outputFile,
