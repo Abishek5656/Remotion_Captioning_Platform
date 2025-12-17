@@ -3,6 +3,7 @@ import os
 import json
 from faster_whisper import WhisperModel
 
+print("Python:", sys.version)
 
 def main():
     if len(sys.argv) != 3:
